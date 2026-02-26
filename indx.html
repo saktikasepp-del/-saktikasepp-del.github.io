@@ -1,0 +1,2905 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT.ANEKA USAHA MAMAH OCTO | Keripik Pare Premium</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --hijau-tua: #1b5e20;
+            --hijau: #2e7d32;
+            --hijau-muda: #4caf50;
+            --hijau-cerah: #81c784;
+            --kuning-tua: #f9a825;
+            --kuning: #fdd835;
+            --kuning-muda: #ffee58;
+            --kuning-cerah: #fff9c4;
+            --putih: #ffffff;
+            --hitam: #1a1a1a;
+            --abu: #f5f5f5;
+            --merah: #e53935;
+            --biru: #2196f3;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--abu);
+            color: var(--hitam);
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--hijau-tua);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--kuning);
+            border-radius: 6px;
+        }
+        
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--hijau-tua);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        .loader-content {
+            text-align: center;
+        }
+        .loader-icon {
+            font-size: 5em;
+            animation: spin 2s linear infinite, bounce 1s ease infinite;
+        }
+        .loader-text {
+            color: var(--kuning);
+            font-size: 1.5em;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(135deg, var(--hijau-tua) 0%, var(--hijau) 100%);
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 5px 30px rgba(27, 94, 32, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--putih);
+            font-size: 1.5em;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--kuning);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            animation: bounce 2s infinite;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--putih);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--kuning);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .cart-btn {
+            background: var(--kuning);
+            color: var(--hijau-tua);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(253, 216, 53, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cart-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(253, 216, 53, 0.6);
+        }
+        
+        .cart-btn .cart-count {
+            background: var(--hijau-tua);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 50%;
+            margin-left: 5px;
+            font-size: 0.9em;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--hijau-tua) 0%, var(--hijau-muda) 50%, var(--kuning-cerah) 100%);
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/></svg>');
+            background-size: 100px;
+            animation: float-bg 20s linear infinite;
+        }
+        
+        @keyframes float-bg {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+        
+        .hero-content {
+            flex: 1;
+            z-index: 10;
+            color: var(--putih);
+            animation: slideInLeft 1s ease;
+        }
+        
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: var(--kuning);
+            color: var(--hijau-tua);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 5px 15px rgba(253, 216, 53, 0.4); }
+            50% { box-shadow: 0 5px 30px rgba(253, 216, 53, 0.8); }
+        }
+        
+        .hero h1 {
+            font-size: 4em;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero h1 span {
+            color: var(--kuning);
+            display: block;
+            position: relative;
+        }
+        
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--kuning);
+            opacity: 0.3;
+            border-radius: 5px;
+        }
+        
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-primary {
+            background: var(--kuning);
+            color: var(--hijau-tua);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(253, 216, 53, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(253, 216, 53, 0.6);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--putih);
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            border: 3px solid var(--putih);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--putih);
+            color: var(--hijau-tua);
+            transform: translateY(-3px);
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: slideInRight 1s ease;
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .hero-img-container {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, var(--kuning-cerah) 0%, transparent 70%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 6s ease-in-out infinite;
+            position: relative;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        .hero-img-container img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 10px solid var(--kuning);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .hero-img-container:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            background: var(--kuning);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float-particle 10s infinite;
+        }
+        
+        @keyframes float-particle {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+        }
+        
+        /* Stats Bar */
+        .stats-bar {
+            background: var(--kuning);
+            padding: 30px 10%;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 30px;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .stat-item {
+            text-align: center;
+            color: var(--hijau-tua);
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: 800;
+            display: block;
+            animation: countUp 2s ease;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 10%;
+            background: var(--putih);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8em;
+            color: var(--hijau-tua);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--kuning);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: #666;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, var(--hijau-cerah) 0%, var(--kuning-cerah) 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .feature-card:hover::before {
+            left: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--kuning);
+            box-shadow: 0 20px 40px rgba(46, 125, 50, 0.2);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--kuning);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotate(360deg) scale(1.1);
+        }
+        
+        .feature-card h3 {
+            color: var(--hijau-tua);
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 100px 10%;
+            background: linear-gradient(180deg, var(--abu) 0%, var(--kuning-cerah) 100%);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .product-card {
+            background: var(--putih);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            box-shadow: 0 25px 60px rgba(27, 94, 32, 0.2);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: var(--kuning);
+            color: var(--hijau-tua);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9em;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        .product-image {
+            height: 280px;
+            background: linear-gradient(135deg, var(--hijau-cerah) 0%, var(--kuning-cerah) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 220px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .product-info {
+            padding: 30px;
+        }
+        
+        .product-info h3 {
+            font-size: 1.6em;
+            color: var(--hijau-tua);
+            margin-bottom: 10px;
+        }
+        
+        .product-info p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .price {
+            font-size: 1.8em;
+            font-weight: 800;
+            color: var(--hijau);
+        }
+        
+        .price span {
+            font-size: 0.6em;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+        
+        .rating {
+            color: var(--kuning-tua);
+            font-size: 1.2em;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            background: linear-gradient(135deg, var(--hijau) 0%, var(--hijau-muda) 100%);
+            color: var(--putih);
+            border: none;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .add-to-cart::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .add-to-cart:active::after {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .add-to-cart:hover {
+            background: linear-gradient(135deg, var(--kuning) 0%, var(--kuning-muda) 100%);
+            color: var(--hijau-tua);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(253, 216, 53, 0.4);
+        }
+        
+        /* Flash Sale Countdown */
+        .flash-sale {
+            background: linear-gradient(135deg, var(--merah) 0%, #ff5252 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(229, 57, 53, 0.3);
+            animation: shake 2s infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            2% { transform: translateX(-5px); }
+            4% { transform: translateX(5px); }
+            6% { transform: translateX(-5px); }
+            8% { transform: translateX(5px); }
+            10% { transform: translateX(0); }
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .countdown-item {
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+        
+        .countdown-item span {
+            font-size: 2em;
+            font-weight: 800;
+            display: block;
+        }
+        
+        .countdown-item label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        /* Benefits Section */
+        .benefits {
+            padding: 100px 10%;
+            background: var(--hijau-tua);
+            color: var(--putih);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefits::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--kuning);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            opacity: 0.1;
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        .benefits-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .benefits-text h2 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+        
+        .benefits-text h2 span {
+            color: var(--kuning);
+            position: relative;
+        }
+        
+        .benefit-list {
+            list-style: none;
+        }
+        
+        .benefit-list li {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            font-size: 1.2em;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .benefit-list li:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(10px);
+        }
+        
+        .benefit-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--kuning);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-list li:hover .benefit-icon {
+            transform: rotate(360deg) scale(1.1);
+        }
+        
+        .benefits-image {
+            position: relative;
+        }
+        
+        .benefits-image img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 30px;
+            border: 10px solid var(--kuning);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .benefits-image:hover img {
+            transform: scale(1.05) rotate(-2deg);
+        }
+        
+        /* Interactive Quiz Section */
+        .quiz-section {
+            padding: 100px 10%;
+            background: linear-gradient(135deg, var(--kuning-cerah) 0%, var(--putih) 100%);
+            text-align: center;
+        }
+        
+        .quiz-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        .quiz-question {
+            font-size: 1.5em;
+            color: var(--hijau-tua);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .quiz-options {
+            display: grid;
+            gap: 15px;
+        }
+        
+        .quiz-option {
+            padding: 20px;
+            background: var(--abu);
+            border: 3px solid transparent;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--hijau);
+            background: var(--hijau-cerah);
+            transform: translateX(10px);
+        }
+        
+        .quiz-option.correct {
+            background: var(--hijau-muda);
+            color: white;
+            border-color: var(--hijau);
+        }
+        
+        .quiz-result {
+            display: none;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--hijau) 0%, var(--hijau-muda) 100%);
+            color: white;
+            border-radius: 20px;
+            margin-top: 20px;
+            animation: slideInUp 0.5s ease;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .discount-code {
+            background: var(--kuning);
+            color: var(--hijau-tua);
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.5em;
+            font-weight: 800;
+            margin: 20px 0;
+            display: inline-block;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .discount-code:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(253, 216, 53, 0.5);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 10%;
+            background: var(--putih);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(135deg, var(--kuning-cerah) 0%, var(--putih) 100%);
+            padding: 40px;
+            border-radius: 25px;
+            border: 3px solid var(--hijau-cerah);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 8em;
+            color: var(--hijau-cerah);
+            opacity: 0.3;
+            font-family: serif;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .stars {
+            color: var(--kuning-tua);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--hijau);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--putih);
+            font-size: 1.5em;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover .author-avatar {
+            transform: scale(1.1) rotate(360deg);
+        }
+        
+        .author-info h4 {
+            color: var(--hijau-tua);
+            font-size: 1.2em;
+        }
+        
+        .author-info p {
+            color: #888;
+        }
+        
+        /* Live Notification */
+        .live-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            z-index: 999;
+            transform: translateX(-400px);
+            transition: all 0.5s ease;
+            max-width: 350px;
+            border-left: 5px solid var(--hijau);
+        }
+        
+        .live-notification.show {
+            transform: translateX(0);
+        }
+        
+        .live-dot {
+            width: 12px;
+            height: 12px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 10%;
+            background: linear-gradient(135deg, var(--kuning) 0%, var(--kuning-muda) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .cta h2 {
+            font-size: 3.5em;
+            color: var(--hijau-tua);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta p {
+            font-size: 1.3em;
+            color: var(--hijau);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-cta {
+            background: var(--hijau-tua);
+            color: var(--putih);
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(27, 94, 32, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(27, 94, 32, 0.6);
+            background: var(--hijau);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: var(--hijau-tua);
+            border: 3px solid var(--hijau-tua);
+        }
+        
+        .btn-outline:hover {
+            background: var(--hijau-tua);
+            color: var(--putih);
+        }
+        
+        /* Newsletter Popup */
+        .newsletter-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .newsletter-popup.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .newsletter-content {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            animation: zoomIn 0.5s ease;
+            border: 5px solid var(--kuning);
+        }
+        
+        @keyframes zoomIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .close-popup {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s ease;
+        }
+        
+        .close-popup:hover {
+            color: var(--merah);
+            transform: rotate(90deg);
+        }
+        
+        .newsletter-content h3 {
+            color: var(--hijau-tua);
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-content p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            min-width: 250px;
+            padding: 15px 20px;
+            border: 2px solid var(--hijau-cerah);
+            border-radius: 50px;
+            font-size: 1em;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form input:focus {
+            border-color: var(--hijau);
+            box-shadow: 0 0 20px rgba(46, 125, 50, 0.2);
+        }
+        
+        .newsletter-form button {
+            background: var(--hijau);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-form button:hover {
+            background: var(--hijau-tua);
+            transform: scale(1.05);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--hijau-tua);
+            color: var(--putih);
+            padding: 60px 10% 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-section h3 {
+            color: var(--kuning);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: var(--kuning);
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: var(--hijau);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--kuning);
+            color: var(--hijau-tua);
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--hijau);
+            color: #aaa;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            font-size: 2em;
+            color: var(--putih);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu:hover {
+            transform: scale(1.1);
+            color: var(--kuning);
+        }
+        
+        /* Shopping Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            height: 100%;
+            background: white;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+            z-index: 1001;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-header {
+            background: var(--hijau-tua);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-header h3 {
+            font-size: 1.5em;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-cart:hover {
+            transform: rotate(90deg);
+            color: var(--kuning);
+        }
+        
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background: var(--abu);
+            border-radius: 15px;
+            margin-bottom: 15px;
+            animation: slideInRight 0.3s ease;
+            position: relative;
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background: var(--hijau-cerah);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-details h4 {
+            color: var(--hijau-tua);
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+        
+        .cart-item-details p {
+            color: var(--hijau);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border: none;
+            background: var(--hijau);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+        
+        .qty-btn:hover {
+            background: var(--hijau-tua);
+            transform: scale(1.1);
+        }
+        
+        .remove-item {
+            background: var(--merah);
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        .remove-item:hover {
+            transform: scale(1.1) rotate(90deg);
+        }
+        
+        .cart-footer {
+            padding: 20px;
+            border-top: 2px solid var(--abu);
+            background: white;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--hijau-tua);
+            margin-bottom: 15px;
+            padding: 10px;
+            background: var(--kuning-cerah);
+            border-radius: 10px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            background: var(--kuning);
+            color: var(--hijau-tua);
+            border: none;
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 10px;
+        }
+        
+        .checkout-btn:hover {
+            background: var(--hijau);
+            color: white;
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .clear-cart-btn {
+            width: 100%;
+            background: transparent;
+            color: var(--merah);
+            border: 2px solid var(--merah);
+            padding: 12px;
+            border-radius: 15px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .clear-cart-btn:hover {
+            background: var(--merah);
+            color: white;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        .empty-cart-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+        
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .cart-overlay.show {
+            display: block;
+            opacity: 1;
+        }
+        
+        /* Checkout Form Modal */
+        .checkout-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .checkout-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .checkout-content {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideInUp 0.5s ease;
+            border: 5px solid var(--kuning);
+        }
+        
+        .checkout-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .checkout-header h2 {
+            color: var(--hijau-tua);
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .checkout-header p {
+            color: #666;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--hijau-tua);
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--hijau-cerah);
+            border-radius: 12px;
+            font-size: 1em;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--hijau);
+            box-shadow: 0 0 20px rgba(46, 125, 50, 0.2);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .order-summary {
+            background: var(--abu);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .order-summary h3 {
+            color: var(--hijau-tua);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #ccc;
+        }
+        
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--hijau-tua);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid var(--hijau);
+        }
+        
+        .submit-order-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--hijau) 0%, var(--hijau-muda) 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .submit-order-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(46, 125, 50, 0.4);
+        }
+        
+        .close-checkout {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+            transition: all 0.3s ease;
+            background: none;
+            border: none;
+        }
+        
+        .close-checkout:hover {
+            color: var(--merah);
+            transform: rotate(90deg);
+        }
+        
+        /* Success Modal */
+        .success-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .success-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .success-content {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            text-align: center;
+            max-width: 450px;
+            animation: zoomIn 0.5s ease;
+            border: 5px solid var(--hijau);
+        }
+        
+        .success-icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .success-content h2 {
+            color: var(--hijau-tua);
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .success-content p {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .success-btn {
+            background: var(--hijau);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .success-btn:hover {
+            background: var(--hijau-tua);
+            transform: scale(1.05);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--hijau-tua);
+                flex-direction: column;
+                padding: 20px;
+                gap: 15px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero {
+                flex-direction: column;
+                padding: 120px 5% 50px;
+                text-align: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .hero-image {
+                margin-top: 40px;
+            }
+            
+            .hero-img-container {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .hero-img-container img {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .benefits-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-text h2 {
+                font-size: 2em;
+            }
+            
+            .cta h2 {
+                font-size: 2.2em;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .checkout-content {
+                padding: 25px;
+                margin: 10px;
+            }
+        }
+        
+        /* Confetti Animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--kuning);
+            position: absolute;
+            animation: confetti-fall 3s linear forwards;
+            z-index: 9999;
+        }
+        
+        @keyframes confetti-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        /* Toast Notification - FIXED */
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: -400px;
+            background: var(--hijau);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            z-index: 1002;
+            transition: all 0.5s ease;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            max-width: 350px;
+        }
+        
+        .toast.show {
+            right: 30px;
+        }
+        
+        .toast.hide {
+            right: -400px;
+        }
+        
+        .toast-icon {
+            font-size: 2em;
+        }
+        
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--kuning);
+            color: var(--hijau-tua);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5em;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        
+        .scroll-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            background: var(--hijau);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <div class="loader-icon">🥒</div>
+            <div class="loader-text">Memuat Keripik Pare...</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+            <div class="logo-icon">🥒</div>
+            <span>KERIPIK PARIA MAMAH OCTO</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#products">Produk</a></li>
+            <li><a href="#benefits">Manfaat</a></li>
+            <li><a href="#quiz">Kuis</a></li>
+            <li><a href="#testimonials">Testimoni</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+        <button class="cart-btn" onclick="toggleCart()">
+            🛒 Keranjang <span class="cart-count" id="cartCount">0</span>
+        </button>
+        <div class="mobile-menu" onclick="toggleMobileMenu()">☰</div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">🌟 PT.ANEKA USAHA MAMAH OCTO</div>
+            <h1>Cemilan Sehat <span>Untuk Keluarga Sehat</span></h1>
+            <p>Keripik paria mamah octo buah segar dan berkualitas di petik dari petani lokal, rasa gurih dan rasa cinta yang menjadi satu hanya ada di Keripik paria mamah octo.</p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn-primary" onclick="showToast('🎉 Selamat datang! Dapatkan diskon 20% hari ini!')">🛍️ Beli Sekarang</a>
+                <a href="#benefits" class="btn-secondary">📖 Pelajari Manfaat</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-img-container">
+                <img src="https://i.ibb.co.com/k64Pqb1N/633ae1292d901-keripik-pare-663-372.jpg" alt="Pare Segar">
+            </div>
+        </div>
+        <!-- Floating Particles -->
+        <div class="particle" style="width: 20px; height: 20px; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="width: 15px; height: 15px; left: 20%; animation-delay: 2s;"></div>
+        <div class="particle" style="width: 25px; height: 25px; left: 70%; animation-delay: 4s;"></div>
+        <div class="particle" style="width: 18px; height: 18px; left: 85%; animation-delay: 1s;"></div>
+    </section>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-number" data-target="10000">0</span>
+            <div class="stat-label">Pelanggan Puas</div>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" data-target="50">0</span>
+            <div class="stat-label">Mitra Petani</div>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" data-target="99">0</span>
+            <div class="stat-label">% Kualitas Terjamin</div>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number" data-target="24">0</span>
+            <div class="stat-label">Jam Pengiriman</div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-title">
+            <h2>Mengapa Memilih Kami?</h2>
+            <p>Kualitas terbaik untuk kesehatan keluarga Anda</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card" onclick="animateCard(this)">
+                <div class="feature-icon">🌿</div>
+                <h3>100% Organik</h3>
+                <p>Ditanam tanpa pestisida kimia, aman untuk dikonsumsi</p>
+            </div>
+            <div class="feature-card" onclick="animateCard(this)">
+                <div class="feature-icon">⚡</div>
+                <h3>Segar Setiap Hari</h3>
+                <p>Dipetik pagi hari dan langsung di olah menjadi keripik</p>
+            </div>
+            <div class="feature-card" onclick="animateCard(this)">
+                <div class="feature-icon">💰</div>
+                <h3>Harga Petani</h3>
+                <p>Langsung dari petani lokal tanpa perantara</p>
+            </div>
+            <div class="feature-card" onclick="animateCard(this)">
+                <div class="feature-icon">🚚</div>
+                <h3>Pengiriman Cepat</h3>
+                <p>Gratis ongkir untuk pembelian di atas 100rb</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <h2>Produk Unggulan</h2>
+            <p>PILIH CEMILAN UNTUK ANDA DAN KELUARGA</p>
+        </div>
+
+        <!-- Flash Sale Countdown -->
+        <div class="flash-sale">
+            <h3>🔥 FLASH SALE - DISKON 25% 🔥</h3>
+            <p>Berakhir dalam:</p>
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span id="hours">04</span>
+                    <label>Jam</label>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">32</span>
+                    <label>Menit</label>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">15</span>
+                    <label>Detik</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card" data-product="Pedas" data-price="15000">
+                <div class="product-badge">BEST SELLER 🔥</div>
+                <div class="product-image">
+                    <img src="https://i.ibb.co.com/SXNwXzPz/pedas.jpg" alt="pedas">
+                </div>
+                <div class="product-info">
+                    <h3>PEDAS</h3>
+                    <p>Rasa pedas yang nendang dan menantang.</p>
+                    <div class="product-price">
+                        <div class="price">Rp15.000 <span>Rp20.000</span></div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('Pedas', 15000, '🌶️')">
+                        🛒 Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-product="Daun Jeruk" data-price="15000">
+                <div class="product-badge" style="background: var(--hijau); color: white;">WAJIB COBA⚡</div>
+                <div class="product-image">
+                    <img src="https://i.ibb.co.com/7d4BY37n/daun-jeruk.jpg" alt="daun jeruk">
+                </div>
+                <div class="product-info">
+                    <h3>DAUN JERUK</h3>
+                    <p>Rasa unik dan dari daun jeruk membuat semakin nafsu makan.</p>
+                    <div class="product-price">
+                        <div class="price">Rp15.000 <span>Rp20.000</span></div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('Daun Jeruk', 15000, '🍃')">
+                        🛒 Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-product="Original" data-price="15000">
+                <div class="product-badge" style="background: var(--hijau-muda); color: white;">PILIHAN SEHAT💚</div>
+                <div class="product-image">
+                    <img src="https://i.ibb.co.com/pvDyqFGP/pare-ori.jpg" alt="original">
+                </div>
+                <div class="product-info">
+                    <h3>ORIGINAL</h3>
+                    <p>Rasa original memiliki rasa sedikit pahit yang alami dari buah pare</p>
+                    <div class="product-price">
+                        <div class="price">Rp15.000 <span>Rp20.000</span></div>
+                        <div class="rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <button class="add-to-cart" onclick="addToCart('Original', 15000, '🥒')">
+                        🛒 Tambah ke Keranjang
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits" id="benefits">
+        <div class="benefits-content">
+            <div class="benefits-text">
+                <h2>Manfaat <span>Pare</span> untuk Kesehatan</h2>
+                <ul class="benefit-list">
+                    <li onclick="highlightBenefit(this)">
+                        <div class="benefit-icon">💉</div>
+                        <span>Menurunkan kadar gula darah - Baik untuk penderita diabetes</span>
+                    </li>
+                    <li onclick="highlightBenefit(this)">
+                        <div class="benefit-icon">❤️</div>
+                        <span>Menjaga kesehatan jantung - Kaya akan serat dan antioksidan</span>
+                    </li>
+                    <li onclick="highlightBenefit(this)">
+                        <div class="benefit-icon">🛡️</div>
+                        <span>Meningkatkan daya tahan tubuh - Vitamin C tinggi</span>
+                    </li>
+                    <li onclick="highlightBenefit(this)">
+                        <div class="benefit-icon">⚖️</div>
+                        <span>Menurunkan berat badan - Rendah kalori, tinggi nutrisi</span>
+                    </li>
+                    <li onclick="highlightBenefit(this)">
+                        <div class="benefit-icon">✨</div>
+                        <span>Membuat kulit sehat - Kaya vitamin dan mineral</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="benefits-image">
+                <img src="https://i.ibb.co.com/JwBBy5fb/1194278794.jpg" alt="Manfaat Pare">
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Quiz Section -->
+    <section class="quiz-section" id="quiz">
+        <div class="section-title">
+            <h2>Kuis Berhadiah! 🎁</h2>
+            <p>Jawab pertanyaan ini dan dapatkan kode diskon eksklusif</p>
+        </div>
+        <div class="quiz-container">
+            <div class="quiz-question" id="quizQuestion">
+                Manfaat apa yang paling utama dari mengonsumsi pare?
+            </div>
+            <div class="quiz-options" id="quizOptions">
+                <div class="quiz-option" onclick="checkAnswer(this, false)">A. Meningkatkan berat badan</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">B. Menurunkan kadar gula darah</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">C. Membuat tulang rapuh</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">D. Menyebabkan insomnia</div>
+            </div>
+            <div class="quiz-result" id="quizResult">
+                <h3>🎉 Selamat! Jawaban Benar!</h3>
+                <p>Gunakan kode diskon ini untuk potongan 30%:</p>
+                <div class="discount-code" onclick="copyDiscount()">MAMAH30</div>
+                <p style="font-size: 0.9em; margin-top: 10px;">Klik kode untuk menyalin</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-title">
+            <h2>Apa Kata Pelanggan?</h2>
+            <p>Testimoni dari pelanggan setia kami</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Keripik Pare nya benar-benar kriuk!! Pengiriman cepat dan packing rapi. Sudah 3 kali order dan tidak pernah kecewa."</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">S</div>
+                    <div class="author-info">
+                        <h4>Siti Aminah</h4>
+                        <p>Ibu Rumah Tangga, Jakarta</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Kualitas premium dengan harga petani. Keripik Parenya cocok untuk menu diet saya. Recommended!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">B</div>
+                    <div class="author-info">
+                        <h4>Budi Santoso</h4>
+                        <p>Chef Restoran, Bandung</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Langganan untuk kebutuhan katering. Stok selalu tersedia dan kualitas konsisten. Terima kasih mamah octo!"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">R</div>
+                    <div class="author-info">
+                        <h4>Rina Wulandari</h4>
+                        <p>Pemilik Catering, Surabaya</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Siap Order Keripik Paling Renyah?</h2>
+        <p>Pesan sekarang dan dapatkan diskon 20% untuk pembelian pertama. Gratis ongkir ke seluruh Indonesia!</p>
+        <div class="cta-buttons">
+            <a href="#products" class="btn-cta" onclick="createConfetti()">🛒 Pesan Sekarang</a>
+            <a href="https://wa.me/6281234567890" class="btn-cta btn-outline" target="_blank">📱 Chat WhatsApp</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🥒 Keripik Pare Mamah Octo</h3>
+                <p>Menyediakan keripik pare berkualitas premium langsung dari petani lokal. Sehat, organik, dan terjangkau.</p>
+                <div class="social-links">
+                    <a href="#" onclick="showToast('Facebook clicked!')">📘</a>
+                    <a href="#" onclick="showToast('Instagram clicked!')">📸</a>
+                    <a href="#" onclick="showToast('Twitter clicked!')">🐦</a>
+                    <a href="#" onclick="showToast('YouTube clicked!')">▶️</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Menu Cepat</h3>
+                <p><a href="#home">Beranda</a></p>
+                <p><a href="#products">Produk</a></p>
+                <p><a href="#benefits">Manfaat</a></p>
+                <p><a href="#testimonials">Testimoni</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Kontak Kami</h3>
+                <p>📍 Kp. Cirende Pabuaran RT.002 RW.002, Desa Kalanganyar, Kecamatan Kalanganyar, Kabupaten Lebak, Provinsi Banten</p>
+                <p>📞 089509408026</p>
+                <p>✉️ saktikasepp@gmail.com</p>
+                <p>🕐 Buka: Senin-Sabtu (08.00-17.00)</p>
+            </div>
+            <div class="footer-section">
+                <h3>Layanan</h3>
+                <p><a href="#" onclick="showComingSoon()">Cara Pemesanan</a></p>
+                <p><a href="#" onclick="showComingSoon()">Pengiriman</a></p>
+                <p><a href="#" onclick="showComingSoon()">Return Policy</a></p>
+                <p><a href="#" onclick="showComingSoon()">FAQ</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PT.Aneka Usaha Mamah Octo. Developer Sakti Leandro Ramot Sinaga</p>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>🛒 Keranjang Belanja</h3>
+            <button class="close-cart" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <div class="empty-cart-icon">🛒</div>
+                <p>Keranjang masih kosong</p>
+                <p style="font-size: 0.9em; margin-top: 10px;">Yuk tambah produk!</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">Rp0</span>
+            </div>
+            <button class="checkout-btn" onclick="openCheckout()">🛍️ Checkout Sekarang</button>
+            <button class="clear-cart-btn" onclick="clearCart()">🗑️ Kosongkan Keranjang</button>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <button class="close-checkout" onclick="closeCheckout()">✕</button>
+            <div class="checkout-header">
+                <h2>📝 Formulir Pemesanan</h2>
+                <p>Lengkapi data Anda untuk melanjutkan pemesanan</p>
+            </div>
+            
+            <div class="order-summary" id="orderSummary">
+                <h3>📦 Ringkasan Pesanan</h3>
+                <div id="summaryItems"></div>
+                <div class="summary-total">
+                    <span>Total Pembayaran:</span>
+                    <span id="summaryTotal">Rp0</span>
+                </div>
+            </div>
+
+            <form id="checkoutForm" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label for="customerName">👤 Nama Lengkap *</label>
+                    <input type="text" id="customerName" name="customerName" required placeholder="Masukkan nama lengkap Anda">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerPhone">📱 Nomor WhatsApp *</label>
+                    <input type="tel" id="customerPhone" name="customerPhone" required placeholder="Contoh: 08123456789" pattern="[0-9]{10,13}">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerEmail">✉️ Email (Opsional)</label>
+                    <input type="email" id="customerEmail" name="customerEmail" placeholder="email@contoh.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="customerAddress">🏠 Alamat Lengkap *</label>
+                    <textarea id="customerAddress" name="customerAddress" required placeholder="Masukkan alamat lengkap (Jalan, RT/RW, Kelurahan, Kecamatan, Kota, Kode Pos)"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="paymentMethod">💳 Metode Pembayaran *</label>
+                    <select id="paymentMethod" name="paymentMethod" required>
+                        <option value="">Pilih metode pembayaran</option>
+                        <option value="Transfer Bank">Transfer Bank (BCA/BRI/Mandiri)</option>
+                        <option value="COD">Bayar di Tempat (COD)</option>
+                        <option value="Dana">DANA</option>
+                        <option value="OVO">OVO</option>
+                        <option value="GoPay">GoPay</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="orderNotes">📝 Catatan Tambahan (Opsional)</label>
+                    <textarea id="orderNotes" name="orderNotes" placeholder="Contoh: Packing extra bubble wrap, kirim di jam sore, etc."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-order-btn">
+                    📲 Kirim Pesanan via WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">🎉</div>
+            <h2>Pesanan Berhasil!</h2>
+            <p>Terima kasih telah memesan. Kami akan segera menghubungi Anda via WhatsApp untuk konfirmasi pesanan.</p>
+            <button class="success-btn" onclick="closeSuccessModal()">Oke, Siap!</button>
+        </div>
+    </div>
+
+    <!-- Live Notification -->
+    <div class="live-notification" id="liveNotification">
+        <div class="live-dot"></div>
+        <div>
+            <strong>Seseorang baru saja membeli!</strong>
+            <p style="font-size: 0.9em; color: #666;" id="notificationText">Keripik Pare Pedas - 2 menit yang lalu</p>
+        </div>
+    </div>
+
+    <!-- Newsletter Popup -->
+    <div class="newsletter-popup" id="newsletterPopup">
+        <div class="newsletter-content">
+            <span class="close-popup" onclick="closeNewsletter()">✕</span>
+            <h3>🎁 Dapatkan Diskon 25%!</h3>
+            <p>Daftarkan email Anda dan dapatkan kode diskon eksklusif untuk pembelian pertama!</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" placeholder="Masukkan email Anda..." required>
+                <button type="submit">Daftar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span class="toast-icon" id="toastIcon">✅</span>
+        <div>
+            <strong id="toastTitle">Berhasil!</strong>
+            <p id="toastMessage">Produk ditambahkan ke keranjang</p>
+        </div>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Shopping Cart System
+        let cart = [];
+        
+        function addToCart(name, price, emoji) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+                showToast('➕', 'Jumlah Ditambah!', `${name} sekarang ${existingItem.quantity} pcs`);
+            } else {
+                cart.push({ name, price, emoji, quantity: 1 });
+                showToast('✅', 'Berhasil Ditambah!', `${name} masuk ke keranjang`);
+            }
+            
+            updateCart();
+            createConfetti();
+            
+            // Button animation
+            const buttons = document.querySelectorAll('.add-to-cart');
+            buttons.forEach(btn => {
+                if (btn.innerHTML.includes(name)) {
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '✅ Ditambahkan!';
+                    btn.style.background = 'var(--hijau-tua)';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.style.background = '';
+                    }, 2000);
+                }
+            });
+        }
+
+        function removeFromCart(index) {
+            const itemName = cart[index].name;
+            cart.splice(index, 1);
+            updateCart();
+            showToast('🗑️', 'Dihapus!', `${itemName} dihapus dari keranjang`);
+        }
+
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                removeFromCart(index);
+            } else {
+                updateCart();
+            }
+        }
+
+        function clearCart() {
+            if (cart.length === 0) return;
+            
+            if (confirm('Yakin ingin mengosongkan keranjang?')) {
+                cart = [];
+                updateCart();
+                showToast('🗑️', 'Keranjang Dikosongkan!', 'Semua item telah dihapus');
+            }
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            const cartFooter = document.getElementById('cartFooter');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">🛒</div>
+                        <p>Keranjang masih kosong</p>
+                        <p style="font-size: 0.9em; margin-top: 10px;">Yuk tambah produk!</p>
+                    </div>
+                `;
+                cartFooter.style.display = 'none';
+                cartCount.textContent = '0';
+                return;
+            }
+            
+            cartItems.innerHTML = '';
+            let total = 0;
+            let count = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                count += item.quantity;
+                
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-image">${item.emoji}</div>
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>Rp${item.price.toLocaleString()}</p>
+                            <div class="quantity-control">
+                                <button class="qty-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                                <span>${item.quantity}</span>
+                                <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="remove-item" onclick="removeFromCart(${index})">✕</button>
+                    </div>
+                `;
+            });
+            
+            cartCount.textContent = count;
+            cartTotal.textContent = `Rp${total.toLocaleString()}`;
+            cartFooter.style.display = 'block';
+            
+            // Save to localStorage
+            localStorage.setItem('mamahOctoCart', JSON.stringify(cart));
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cartSidebar');
+            const overlay = document.getElementById('cartOverlay');
+            
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        // Load cart from localStorage
+        window.addEventListener('load', () => {
+            const savedCart = localStorage.getItem('mamahOctoCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCart();
+            }
+        });
+
+        // Checkout Functions
+        function openCheckout() {
+            if (cart.length === 0) {
+                showToast('❌', 'Keranjang Kosong!', 'Tambahkan produk terlebih dahulu');
+                return;
+            }
+            
+            const modal = document.getElementById('checkoutModal');
+            const summaryItems = document.getElementById('summaryItems');
+            const summaryTotal = document.getElementById('summaryTotal');
+            
+            // Populate summary
+            let itemsHtml = '';
+            let total = 0;
+            
+            cart.forEach(item => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                itemsHtml += `
+                    <div class="summary-item">
+                        <span>${item.emoji} ${item.name} x${item.quantity}</span>
+                        <span>Rp${subtotal.toLocaleString()}</span>
+                    </div>
+                `;
+            });
+            
+            summaryItems.innerHTML = itemsHtml;
+            summaryTotal.textContent = `Rp${total.toLocaleString()}`;
+            
+            modal.classList.add('show');
+            toggleCart(); // Close cart sidebar
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('show');
+        }
+
+        function submitOrder(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const name = formData.get('customerName');
+            const phone = formData.get('customerPhone');
+            const email = formData.get('customerEmail');
+            const address = formData.get('customerAddress');
+            const payment = formData.get('paymentMethod');
+            const notes = formData.get('orderNotes');
+            
+            // Calculate total
+            let total = 0;
+            let itemsList = '';
+            
+            cart.forEach(item => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                itemsList += `- ${item.name} (${item.quantity}x) = Rp${subtotal.toLocaleString()}%0A`;
+            });
+            
+            // Format WhatsApp message
+            const message = `*🛒 PESANAN BARU - KERIPIK PARIA MAMAH OCTO*%0A%0A` +
+                          `*📋 Data Pemesan:*%0A` +
+                          `Nama: ${name}%0A` +
+                          `No. WA: ${phone}%0A` +
+                          `Email: ${email || '-'}%0A` +
+                          `Alamat: ${address}%0A` +
+                          `Pembayaran: ${payment}%0A%0A` +
+                          `*📦 Detail Pesanan:*%0A${itemsList}%0A` +
+                          `*💰 Total: Rp${total.toLocaleString()}*%0A%0A` +
+                          `*📝 Catatan:* ${notes || '-'}`;
+            
+            // Open WhatsApp
+            window.open(`https://wa.me/6289509408026?text=${message}`, '_blank');
+            
+            // Show success modal
+            closeCheckout();
+            showSuccessModal();
+            
+            // Clear cart
+            cart = [];
+            updateCart();
+        }
+
+        function showSuccessModal() {
+            document.getElementById('successModal').classList.add('show');
+            createConfetti();
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('show');
+        }
+
+        // FIXED Toast Notification - Auto hide after 3 seconds
+        let toastTimeout;
+        
+        function showToast(icon, title, message) {
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toastIcon');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            // Clear existing timeout
+            if (toastTimeout) {
+                clearTimeout(toastTimeout);
+            }
+            
+            // Reset toast
+            toast.classList.remove('show', 'hide');
+            
+            // Update content
+            toastIcon.textContent = icon;
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            
+            // Show toast
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            // Auto hide after 3 seconds
+            toastTimeout = setTimeout(() => {
+                hideToast();
+            }, 3000);
+        }
+
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('show');
+            toast.classList.add('hide');
+            
+            setTimeout(() => {
+                toast.classList.remove('hide');
+            }, 500);
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navbar');
+            const scrollTop = document.getElementById('scrollTop');
+            
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(27, 94, 32, 0.95)';
+                nav.style.backdropFilter = 'blur(10px)';
+                scrollTop.classList.add('show');
+            } else {
+                nav.style.background = 'linear-gradient(135deg, var(--hijau-tua) 0%, var(--hijau) 100%)';
+                nav.style.backdropFilter = 'none';
+                scrollTop.classList.remove('show');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+            const diff = endOfDay - now;
+            
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Animated Counter
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        }
+
+        // Intersection Observer for counters
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.stat-number').forEach(stat => {
+            observer.observe(stat);
+        });
+
+        // Live Notifications
+        const notifications = [
+            { name: 'Keripik Pare Pedas', time: '2 menit yang lalu' },
+            { name: 'Keripik Pare Original', time: '5 menit yang lalu' },
+            { name: 'Keripik Pare Daun Jeruk', time: '8 menit yang lalu' },
+            { name: 'Paket Hemat 3 Rasa', time: '12 menit yang lalu' }
+        ];
+
+        function showNotification() {
+            const notif = document.getElementById('liveNotification');
+            const text = document.getElementById('notificationText');
+            const randomNotif = notifications[Math.floor(Math.random() * notifications.length)];
+            
+            text.textContent = `${randomNotif.name} - ${randomNotif.time}`;
+            notif.classList.add('show');
+            
+            setTimeout(() => {
+                notif.classList.remove('show');
+            }, 5000);
+        }
+
+        setInterval(showNotification, 15000);
+        setTimeout(showNotification, 5000);
+
+        // Newsletter Popup
+        setTimeout(() => {
+            document.getElementById('newsletterPopup').classList.add('show');
+        }, 10000);
+
+        function closeNewsletter() {
+            document.getElementById('newsletterPopup').classList.remove('show');
+        }
+
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            showToast('🎉', 'Berhasil!', 'Kode diskon telah dikirim ke email Anda!');
+            closeNewsletter();
+            createConfetti();
+        }
+
+        // Quiz System
+        function checkAnswer(element, isCorrect) {
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none';
+                if (opt === element) {
+                    opt.classList.add(isCorrect ? 'correct' : '');
+                    opt.style.background = isCorrect ? 'var(--hijau-muda)' : 'var(--merah)';
+                    opt.style.color = 'white';
+                }
+            });
+            
+            if (isCorrect) {
+                setTimeout(() => {
+                    document.getElementById('quizResult').style.display = 'block';
+                    createConfetti();
+                }, 500);
+            } else {
+                showToast('❌', 'Jawaban Salah!', 'Coba lagi ya...');
+                setTimeout(() => {
+                    options.forEach(opt => {
+                        opt.style.pointerEvents = 'auto';
+                        opt.classList.remove('correct');
+                        opt.style.background = '';
+                        opt.style.color = '';
+                    });
+                }, 1500);
+            }
+        }
+
+        function copyDiscount() {
+            const code = 'MAMAH30';
+            navigator.clipboard.writeText(code).then(() => {
+                showToast('✅', 'Berhasil Disalin!', `Kode ${code} telah disalin`);
+            });
+        }
+
+        // Confetti Effect
+        function createConfetti() {
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = ['#fdd835', '#4caf50', '#ff5252', '#2196f3'][Math.floor(Math.random() * 4)];
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+
+        // Card Animation
+        function animateCard(card) {
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = '';
+            }, 200);
+        }
+
+        // Benefit Highlight
+        function highlightBenefit(item) {
+            item.style.background = 'var(--kuning)';
+            item.style.color = 'var(--hijau-tua)';
+            item.style.transform = 'scale(1.05)';
+            
+            setTimeout(() => {
+                item.style.background = '';
+                item.style.color = '';
+                item.style.transform = '';
+            }, 1000);
+        }
+
+        // Coming Soon Alert
+        function showComingSoon() {
+            showToast('🚧', 'Coming Soon!', 'Fitur ini sedang dalam pengembangan');
+        }
+
+        // Parallax Effect for Hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero-img-container');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Easter Egg - Konami Code
+        let konamiCode = [];
+        const secretCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        
+        window.addEventListener('keydown', (e) => {
+            konamiCode.push(e.key);
+            konamiCode = konamiCode.slice(-10);
+            
+            if (konamiCode.join(',') === secretCode.join(',')) {
+                showToast('🎮', 'Cheat Code Activated!', 'Gunakan kode KONAMI10 untuk diskon 10%');
+                createConfetti();
+            }
+        });
+
+        // Close modals on outside click
+        window.onclick = function(event) {
+            const checkoutModal = document.getElementById('checkoutModal');
+            const successModal = document.getElementById('successModal');
+            const newsletterPopup = document.getElementById('newsletterPopup');
+            
+            if (event.target === checkoutModal) {
+                closeCheckout();
+            }
+            if (event.target === successModal) {
+                closeSuccessModal();
+            }
+            if (event.target === newsletterPopup) {
+                closeNewsletter();
+            }
+        }
+    </script>
+
+</body>
+</html>
